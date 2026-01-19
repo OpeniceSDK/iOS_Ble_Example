@@ -21,7 +21,7 @@ struct NotificationView : View {
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 Button("获取应用通知") {
                     Task{
-                        let result = await OpeniceSDK.shared.getNotifications()
+                        let result = await OpeniceManager.shared.getNotifications()
                         print("获取应用通知 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
@@ -32,7 +32,7 @@ struct NotificationView : View {
                             otherSwitch: false,
                             appList: [.wechat, .qq]
                         )
-                        let success = await OpeniceSDK.shared.setNotifications(config)
+                        let success = await OpeniceManager.shared.setNotifications(config)
                         print("设置应用通知 success: \(success)")
                     }
                 }.buttonStyle(.bordered)

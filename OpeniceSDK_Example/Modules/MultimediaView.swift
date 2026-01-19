@@ -21,14 +21,14 @@ struct MultimediaView: View {
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 Button("获取电话提醒") {
                     Task {
-                        let result = await OpeniceSDK.shared.getPhoneRemind()
+                        let result = await OpeniceManager.shared.getPhoneRemind()
                         print("获取电话提醒 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
                 
                 Button("设置电话提醒") {
                     Task {
-                        let success = await OpeniceSDK.shared.setPhoneRemind(
+                        let success = await OpeniceManager.shared.setPhoneRemind(
                             isEnabled: false,
                             delaySeconds: 5
                         )
@@ -37,7 +37,7 @@ struct MultimediaView: View {
                 }.buttonStyle(.bordered)
                 Button("获取音乐开关") {
                     Task {
-                        let enabled = await OpeniceSDK.shared.getMusicControl()
+                        let enabled = await OpeniceManager.shared.getMusicControl()
                         print("获取音乐开关 enabled:", enabled)
                     }
                 }
@@ -45,7 +45,7 @@ struct MultimediaView: View {
 
                 Button("设置音乐开关") {
                     Task {
-                        let success = await OpeniceSDK.shared.setMusicControl(enabled: true)
+                        let success = await OpeniceManager.shared.setMusicControl(enabled: true)
                         print("设置音乐开关 success:", success)
                     }
                 }
@@ -53,7 +53,7 @@ struct MultimediaView: View {
 
                 Button("下发音乐信息") {
                     Task {
-                        let success = await OpeniceSDK.shared.pushMusicInfo(
+                        let success = await OpeniceManager.shared.pushMusicInfo(
                             title: "Song Title",
                             artist: "Artist Name"
                         )
@@ -65,7 +65,7 @@ struct MultimediaView: View {
                 Button("下发音乐状态") {
                     Task {
                         let config = MusicStateConfig(state: .playing, curTime: 12000, duration: 240000)
-                        let success = await OpeniceSDK.shared.pushMusicState(config)
+                        let success = await OpeniceManager.shared.pushMusicState(config)
                         print("下发音乐状态 success:", success)
                     }
                 }
@@ -73,7 +73,7 @@ struct MultimediaView: View {
 
                 Button("下发音乐音量") {
                     Task {
-                        let success = await OpeniceSDK.shared.pushMusicVolume(
+                        let success = await OpeniceManager.shared.pushMusicVolume(
                             current: 8,
                             max: 15
                         )
@@ -84,7 +84,7 @@ struct MultimediaView: View {
 
                 Button("进入音乐界面") {
                     Task {
-                        let success = await OpeniceSDK.shared.notifyPlayState()
+                        let success = await OpeniceManager.shared.notifyPlayState()
                         print("进入音乐界面 success:", success)
                     }
                 }
@@ -101,7 +101,7 @@ struct MultimediaView: View {
                             "谢谢5"
                         ]
                         
-                        let success = await OpeniceSDK.shared.syncQuickReply(templates: templates)
+                        let success = await OpeniceManager.shared.syncQuickReply(templates: templates)
                         print("同步短信回复 success:", success)
                     }
                 }

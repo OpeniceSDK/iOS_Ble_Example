@@ -27,6 +27,7 @@ struct HomePageView: View {
                         Text("名称: \(device.name)")
                         Text("UUID: \(device.deviceId)")
                         Text("MAC: \(device.mac)")
+                        Text("SDK版本: \(OpeniceManager.shared.getSdkVersion())")
                     }
                     .padding(12)
                     .background(Color.gray.opacity(0.1))
@@ -116,7 +117,7 @@ struct HomePageView: View {
     private func autoConnect() async {
         guard let savedDevice = currentDevice else { return }
 
-        let success: Bool = await OpeniceSDK.shared.reconnect(savedDevice.deviceId)
+        let success: Bool = await OpeniceManager.shared.reconnect(savedDevice.deviceId)
         await MainActor.run {
             if success {
                 print("✅ 连接成功，切换界面")
@@ -134,7 +135,7 @@ struct HomePageView: View {
         Task {
             guard let savedDevice = currentDevice else { return }
             // 2. 执行异步解绑 (此时会等待 SDK 的 return)
-            let isSuccess = await OpeniceSDK.shared.unBind(secretKey: savedDevice.secretKey)
+            let isSuccess = await OpeniceManager.shared.unBind(secretKey: savedDevice.secretKey)
             
             // 3. 回到主线程更新 UI
             await MainActor.run {

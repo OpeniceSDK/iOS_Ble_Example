@@ -20,7 +20,7 @@ struct HealthMonitoringView1: View {
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 Button("获取健康设置") {
                     Task {
-                        let success = await OpeniceSDK.shared.getHealthSetting()
+                        let success = await OpeniceManager.shared.getHealthSetting()
                         print("获取健康设置 success:", success as Any)
                     }
                 }
@@ -34,7 +34,7 @@ struct HealthMonitoringView1: View {
                             minHeartRate: 40,
                             maxHeartRate: 180
                         )
-                        let success = await OpeniceSDK.shared.setHeartRateDetection(config)
+                        let success = await OpeniceManager.shared.setHeartRateDetection(config)
                         print("设置心率检测 success:", success)
                     }
                 }
@@ -49,7 +49,7 @@ struct HealthMonitoringView1: View {
                             minBloodOxygen: 90,
                             interval: 60
                         )
-                        let success = await OpeniceSDK.shared.setBloodOxygenDetection(config)
+                        let success = await OpeniceManager.shared.setBloodOxygenDetection(config)
                         print("设置血氧检测 success:", success)
                     }
                 }
@@ -67,7 +67,7 @@ struct HealthMonitoringView1: View {
                             interval: 60,
                             repeatWeek: .everyday
                         )
-                        let success = await OpeniceSDK.shared.setBloodPressureDetection(config)
+                        let success = await OpeniceManager.shared.setBloodPressureDetection(config)
                         print("设置压力检测 success:", success)
                     }
                 }
@@ -75,7 +75,7 @@ struct HealthMonitoringView1: View {
                 
                 Button("开启呼吸频率") {
                     Task {
-                        let success = await OpeniceSDK.shared.setRespiratoryRate(autoDetection: true)
+                        let success = await OpeniceManager.shared.setRespiratoryRate(autoDetection: true)
                         print("设置呼吸频率 success:", success)
                     }
                 }
@@ -91,7 +91,7 @@ struct HealthMonitoringView1: View {
                             endHour: 18, endMin: 0,
                             repeatWeek: [.friday, .monday]
                         )
-                        let success = await OpeniceSDK.shared.setDrinkClock(config)
+                        let success = await OpeniceManager.shared.setDrinkClock(config)
                         print("设置喝水提醒 success:", success)
                     }
                 }
@@ -108,7 +108,7 @@ struct HealthMonitoringView1: View {
                             endHour: 18, endMin: 0,
                             repeatWeek: .everyday // 每天
                         )
-                        let success = await OpeniceSDK.shared.setSedentaryClock(config)
+                        let success = await OpeniceManager.shared.setSedentaryClock(config)
                         print("设置久坐提醒 success:", success)
                     }
                 }
@@ -116,7 +116,7 @@ struct HealthMonitoringView1: View {
                 
                 Button("开启科学睡眠") {
                     Task {
-                        let success = await OpeniceSDK.shared.setScientificSleep(switchState: true)
+                        let success = await OpeniceManager.shared.setScientificSleep(switchState: true)
                         print("设置科学睡眠 success:", success)
                     }
                 }
@@ -131,14 +131,14 @@ struct HealthMonitoringView1: View {
                             steps: 5000,
                             distance: 3000
                         )
-                        let success = await OpeniceSDK.shared.setHealthyThreeRings(config)
+                        let success = await OpeniceManager.shared.setHealthyThreeRings(config)
                         print("设置三环目标 success:", success)
                     }
                 }
                 .buttonStyle(.bordered)
                 Button("获取三环目标") {
                     Task {
-                        let success = await OpeniceSDK.shared.getHealthyThreeRings()
+                        let success = await OpeniceManager.shared.getHealthyThreeRings()
                         print("获取三环目标 success:", success as Any)
                     }
                 }
@@ -146,7 +146,7 @@ struct HealthMonitoringView1: View {
                 Button("同步历史睡眠") {
                     Task {
                         let now = Int(Date().timeIntervalSince1970 * 1000)
-                        let success = await OpeniceSDK.shared.syncHistorySleep(time: now)
+                        let success = await OpeniceManager.shared.syncHistorySleep(time: now)
                         print("同步历史睡眠 success:", success as Any)
                     }
                 }

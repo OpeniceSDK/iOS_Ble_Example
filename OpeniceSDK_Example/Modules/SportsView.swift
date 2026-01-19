@@ -26,21 +26,21 @@ struct SportsView: View {
                             maxHeartRateAlarm: true,       // 开启心率上限预警
                             maxHeartRate: 180           // 设置心率上限为 180 次/分
                         )
-                        let result = await OpeniceSDK.shared.setSportsSetting(config)
+                        let result = await OpeniceManager.shared.setSportsSetting(config)
                         print("设置运动 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
                 
                 Button("获取运动设置") {
                     Task{
-                        let result = await OpeniceSDK.shared.getSportsSetting()
+                        let result = await OpeniceManager.shared.getSportsSetting()
                         print("获取运动设置 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
                 
                 Button("同步运动记录") {
                     Task{
-                        let result = await OpeniceSDK.shared.getSportsRecordHeader()
+                        let result = await OpeniceManager.shared.getSportsRecordHeader()
                         print("运动记录获取完毕，总数: \(result.count)")
                         
                         for item in result {
@@ -50,7 +50,7 @@ struct SportsView: View {
                 }.buttonStyle(.bordered)
                 Button("设置运动推送") {
                     Task{
-                        let result = await OpeniceSDK.shared.sportsPushSet(.baseball)
+                        let result = await OpeniceManager.shared.sportsPushSet(.baseball)
                         print("设置运动推送 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)

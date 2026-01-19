@@ -64,7 +64,7 @@ struct WeatherView: View {
                             hourlyForecast: hourlyList,
                             dailyForecast: dailyList
                         )
-                        let result =  await OpeniceSDK.shared.syncWeather(config)
+                        let result =  await OpeniceManager.shared.syncWeather(config)
                         print("天气数据 result:", result as Any)
                     }
                 }

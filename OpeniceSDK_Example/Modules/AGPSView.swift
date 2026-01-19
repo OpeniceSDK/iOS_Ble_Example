@@ -1,6 +1,6 @@
 //
 //  DeviceInfoView.swift
-//  OpeniceSDK_Example
+//  OpeniceManager_Example
 //
 //  Created by 易大宝 on 2026/1/8.
 //
@@ -85,7 +85,7 @@ struct AGPSView: View {
                             beidouExpiryDate: 7
                         )
                         
-                        let state = await OpeniceSDK.shared.installAgps(config, filePath: localPath){ prog in
+                        let state = await OpeniceManager.shared.installAgps(config, filePath: localPath){ prog in
                             print("AGPS传输进度: \(Int(prog * 100))%")
                         }
                         print("AGPS结果: \(state)")

@@ -9,7 +9,7 @@ import OpeniceSDK
 import SwiftUI
 import Combine
 
-class DeviceLogViewModel: NSObject, ObservableObject, OpeniceSDKDelegate {
+class DeviceLogViewModel: NSObject, ObservableObject, OpeniceManagerDelegate {
     
     // 这里的文本用于在界面上显示
     @Published var logText: String = "等待设备指令...\n"
@@ -37,7 +37,7 @@ class DeviceLogViewModel: NSObject, ObservableObject, OpeniceSDKDelegate {
         }
     }
     
-    // MARK: - OpeniceSDKDelegate 所有方法的实现
+    // MARK: - OpeniceManagerDelegate 所有方法的实现
     func onFindPhone(isFind: Bool) {
         let status = isFind ? "开始" : "停止"
         appendLog("请求找手机 (\(status))")
@@ -61,7 +61,7 @@ class DeviceLogViewModel: NSObject, ObservableObject, OpeniceSDKDelegate {
     
     func onRequestLocation() {
         Task {
-            await OpeniceSDK.shared.responseLocation(latitude: 39.9042, longitude: 116.4074)
+            await OpeniceManager.shared.responseLocation(latitude: 39.9042, longitude: 116.4074)
         }
         appendLog("设备请求 AGPS 定位")
     }

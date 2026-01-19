@@ -1,0 +1,15 @@
+{
+  "originHash" : "5510741342950ebd94abb92b68c81e24a7aa08cad39f77e2c15f770030b60cbb",
+  "pins" : [
+    {
+      "identity" : "openicesdk-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpeniceSDK/OpeniceSDK-Distribution.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bd92fe428c759da1d0226f3e7f4f2979da17df02"
+      }
+    }
+  ],
+  "version" : 3
+}

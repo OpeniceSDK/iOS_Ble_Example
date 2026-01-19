@@ -56,7 +56,7 @@ struct OTAView: View {
                 }
                 Button("升级版本") {
                     Task {
-                        let state = await OpeniceSDK.shared.otaRequest(filePath: localRoutePath){ prog in
+                        let state = await OpeniceManager.shared.otaRequest(filePath: localRoutePath){ prog in
                             print("升级进度: \(Int(prog * 100))%")
                         }
                         print("升级结果: \(state)")

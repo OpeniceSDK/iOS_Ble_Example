@@ -42,7 +42,7 @@ struct HealthMonitoringView2: View {
                             Button("当天") {
                                 Task {
                                     print("🔵 同步当天 [\(getTitle(for: type))]...")
-                                    let list = await OpeniceSDK.shared.syncHealthData(type, mode: .sameday)
+                                    let list = await OpeniceManager.shared.syncHealthData(type, mode: .sameday)
                                     print("   结果: \(list?.count ?? 0) 条")
                                 }
                             }
@@ -55,7 +55,7 @@ struct HealthMonitoringView2: View {
                                     Task {
                                         print("🟠 同步历史 [\(getTitle(for: type))]...")
                                         let now = Int(Date().timeIntervalSince1970 * 1000)
-                                        let list = await OpeniceSDK.shared.syncHealthData(type, mode: .history(time: now))
+                                        let list = await OpeniceManager.shared.syncHealthData(type, mode: .history(time: now))
                                         print("   结果: \(list?.count ?? 0) 条")
                                     }
                                 }

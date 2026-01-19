@@ -18,7 +18,7 @@ struct ContentView: View {
             HStack {
                 Button("开始扫描") { Task { await startBluetoothScan() } }
                     .buttonStyle(.bordered)
-                Button("停止扫描") { OpeniceSDK.shared.stopScan()  }
+                Button("停止扫描") { OpeniceManager.shared.stopScan()  }
                     .buttonStyle(.bordered)
             }
         
@@ -48,10 +48,10 @@ struct ContentView: View {
     
     private func handleDeviceTap(device: BleDevice) {
         Task {
-            let isConnected = await OpeniceSDK.shared.connect(device.id)
+            let isConnected = await OpeniceManager.shared.connect(device.id)
         
             if isConnected {
-                let isSuccess = await OpeniceSDK.shared.bindRequest(
+                let isSuccess = await OpeniceManager.shared.bindRequest(
                     device: device,
                     secretKey: "101157",
                     randomNumber: "123456"
@@ -77,7 +77,7 @@ struct ContentView: View {
     }
 
     private func startBluetoothScan() async {
-        for await deviceList in OpeniceSDK.shared.startScan() {
+        for await deviceList in OpeniceManager.shared.startScan() {
             devices = deviceList
         }
     }

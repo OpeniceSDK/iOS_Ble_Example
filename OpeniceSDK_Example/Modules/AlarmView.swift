@@ -21,7 +21,7 @@ struct AlarmView: View {
                 
                 Button("获取闹钟") {
                     Task {
-                        let result = await OpeniceSDK.shared.getAlarmClock()
+                        let result = await OpeniceManager.shared.getAlarmClock()
                         print("获取闹钟 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
@@ -33,7 +33,7 @@ struct AlarmView: View {
                             AlarmItem(isOn: true, hour: 8, minute: 45, repeatWeek: .weekdays),  // 周一到周五
                             AlarmItem(isOn: true, hour: 1, minute: 45, repeatWeek: .monday)  // 周一
                         ]
-                        let success = await OpeniceSDK.shared.setAlarmClock(alarms)
+                        let success = await OpeniceManager.shared.setAlarmClock(alarms)
                         print("设置闹钟 success:", success)
                     }
                 }.buttonStyle(.bordered)

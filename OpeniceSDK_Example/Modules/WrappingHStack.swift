@@ -1,6 +1,6 @@
 //
 //  WrappingHStack.swift
-//  OpeniceSDK_Example
+//  OpeniceManager_Example
 //
 //  Created by 易大宝 on 2026/1/9.
 //

@@ -57,7 +57,7 @@ struct RouteView: View {
                 
                 Button("新增路线") {
                     Task {
-                        let state = await OpeniceSDK.shared.addRouteList(routeId: 102226, routeName:"111www",
+                        let state = await OpeniceManager.shared.addRouteList(routeId: 102226, routeName:"111www",
                                                                        routeDistance: 1400,
                                                                        filePath: localRoutePath
                         ) { prog in
@@ -68,14 +68,14 @@ struct RouteView: View {
                 }.buttonStyle(.bordered)
                 Button("获取路线列表") {
                     Task {
-                        let result = await OpeniceSDK.shared.getRouteList()
+                        let result = await OpeniceManager.shared.getRouteList()
                         print("获取路线列表:", result as Any)
                     }
                 }.buttonStyle(.bordered)
                 
                 Button("删除路线") {
                     Task {
-                        let success = await OpeniceSDK.shared.deleteRouteList(routeIds: [102226])
+                        let success = await OpeniceManager.shared.deleteRouteList(routeIds: [102226])
                         print("删除路线 success:", success)
                     }
                 }.buttonStyle(.bordered)

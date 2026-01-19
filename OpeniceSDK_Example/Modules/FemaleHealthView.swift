@@ -30,14 +30,14 @@ struct FemaleHealthView: View {
                             recentStartTime: 7*24*3600, // 最近一次经期开始时间：7天前
                             recentEndTime: 2*24*3600    // 最近一次经期结束时间：2天前
                         )
-                        let result = await OpeniceSDK.shared.syncWomanHealthy(config)
+                        let result = await OpeniceManager.shared.syncWomanHealthy(config)
                         print("同步女性健康 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
            
                 Button("女性健康开关") {
                     Task{
-                        let result = await OpeniceSDK.shared.syncWomanHealthyState(isShow: true)
+                        let result = await OpeniceManager.shared.syncWomanHealthyState(isShow: true)
                         print("女性健康功能 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)

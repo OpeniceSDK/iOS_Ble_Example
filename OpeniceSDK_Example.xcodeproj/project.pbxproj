@@ -7,27 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8858DF3D2F1A240D0046A657 /* OpeniceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8858DF3C2F1A240D0046A657 /* OpeniceSDK.framework */; };
-		8858DF3E2F1A240D0046A657 /* OpeniceSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8858DF3C2F1A240D0046A657 /* OpeniceSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88A7DD722F1E1C8000542F34 /* OpeniceSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 88A7DD712F1E1C8000542F34 /* OpeniceSDK */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8858DF3F2F1A240D0046A657 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8858DF3E2F1A240D0046A657 /* OpeniceSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8858DDEF2F1A20840046A657 /* OpeniceSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpeniceSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8858DF3C2F1A240D0046A657 /* OpeniceSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OpeniceSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8858DF3D2F1A240D0046A657 /* OpeniceSDK.framework in Frameworks */,
+				88A7DD722F1E1C8000542F34 /* OpeniceSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +38,6 @@
 			isa = PBXGroup;
 			children = (
 				8858DDF12F1A20840046A657 /* OpeniceSDK_Example */,
-				8858DF3B2F1A24040046A657 /* Frameworks */,
 				8858DDF02F1A20840046A657 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,14 +50,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8858DF3B2F1A24040046A657 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8858DF3C2F1A240D0046A657 /* OpeniceSDK.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,7 +60,6 @@
 				8858DDEB2F1A20840046A657 /* Sources */,
 				8858DDEC2F1A20840046A657 /* Frameworks */,
 				8858DDED2F1A20840046A657 /* Resources */,
-				8858DF3F2F1A240D0046A657 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -96,6 +70,7 @@
 			);
 			name = OpeniceSDK_Example;
 			packageProductDependencies = (
+				88A7DD712F1E1C8000542F34 /* OpeniceSDK */,
 			);
 			productName = OpeniceSDK_Example;
 			productReference = 8858DDEF2F1A20840046A657 /* OpeniceSDK_Example.app */;
@@ -125,6 +100,9 @@
 			);
 			mainGroup = 8858DDE62F1A20840046A657;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				88A7DD702F1E1C8000542F34 /* XCRemoteSwiftPackageReference "OpeniceSDK-Distribution" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8858DDF02F1A20840046A657 /* Products */;
 			projectDirPath = "";
@@ -384,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		88A7DD702F1E1C8000542F34 /* XCRemoteSwiftPackageReference "OpeniceSDK-Distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OpeniceSDK/OpeniceSDK-Distribution.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		88A7DD712F1E1C8000542F34 /* OpeniceSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88A7DD702F1E1C8000542F34 /* XCRemoteSwiftPackageReference "OpeniceSDK-Distribution" */;
+			productName = OpeniceSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8858DDE72F1A20840046A657 /* Project object */;
 }

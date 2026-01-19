@@ -13,7 +13,7 @@ struct DeviceReportView: View {
     @StateObject private var logger = DeviceLogViewModel()
     
     // 保存旧的代理，以便退出页面时恢复（可选）
-    @State private var previousDelegate: OpeniceSDKDelegate?
+    @State private var previousDelegate: OpeniceManagerDelegate?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -47,13 +47,13 @@ struct DeviceReportView: View {
         }
         .onAppear {
             // 1. 进入页面：保存旧代理，设置当前 logger 为代理
-            self.previousDelegate = OpeniceSDK.shared.delegate
-            OpeniceSDK.shared.delegate = logger
+            self.previousDelegate = OpeniceManager.shared.delegate
+            OpeniceManager.shared.delegate = logger
             print("🟢 监控模式已开启")
         }
         .onDisappear {
             // 2. 离开页面：恢复原来的代理（比如 HomeViewController）
-            OpeniceSDK.shared.delegate = self.previousDelegate
+            OpeniceManager.shared.delegate = self.previousDelegate
             print("🔴 监控模式已关闭")
         }
     }

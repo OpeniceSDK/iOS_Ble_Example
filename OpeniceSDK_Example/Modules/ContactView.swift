@@ -19,7 +19,7 @@ struct ContactView: View {
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 Button("推送来电名称") {
                     Task{
-                        let result = await OpeniceSDK.shared.syncCallName("吴八")
+                        let result = await OpeniceManager.shared.syncCallName("吴八")
                         print("推送来电名称 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
@@ -29,7 +29,7 @@ struct ContactView: View {
                             ContactItem(name: "张三", phone: "13800000001"),
                             ContactItem(name: "李四", phone: "13800000002")
                         ]
-                        let result = await OpeniceSDK.shared.syncContact(contacts)
+                        let result = await OpeniceManager.shared.syncContact(contacts)
                         print("同步联系人 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
@@ -39,7 +39,7 @@ struct ContactView: View {
                             ContactItem(name: "王五", phone: "13911112222"),
                             ContactItem(name: "赵六", phone: "13933334444")
                         ]
-                        let result = await OpeniceSDK.shared.syncSOS(contacts)
+                        let result = await OpeniceManager.shared.syncSOS(contacts)
                         print("同步紧急联系人 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)

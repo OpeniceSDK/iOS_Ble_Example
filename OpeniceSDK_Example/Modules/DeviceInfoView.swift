@@ -24,31 +24,31 @@ struct DeviceInfoView: View {
             
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 Button("找到手表") {
-                    Task { await OpeniceSDK.shared.findWatch(start: true) }
+                    Task { await OpeniceManager.shared.findWatch(start: true) }
                 }
                 .buttonStyle(.bordered)
                 Button("停止寻找") {
-                    Task { await OpeniceSDK.shared.findWatch(start: false) }
+                    Task { await OpeniceManager.shared.findWatch(start: false) }
                 }
                 .buttonStyle(.bordered)
                 Button("获取设备信息") {
                     Task {
                         let secretKey = String(currentDevice?.secretKey ?? "")
-                        let result = await OpeniceSDK.shared.getDeviceInfo(secretKey: secretKey)
+                        let result = await OpeniceManager.shared.getDeviceInfo(secretKey: secretKey)
                         print("设备信息:", result)
                     }
                 }
                 .buttonStyle(.bordered)
           
                 Button("重启设备") {
-                    Task { await OpeniceSDK.shared.restartDevice() }
+                    Task { await OpeniceManager.shared.restartDevice() }
                 }
                 .buttonStyle(.bordered)
                 
                 Button("恢复出厂设置") {
                     Task {
                         let secretKey = String(currentDevice?.secretKey ?? "")
-                        let _ = await OpeniceSDK.shared.resetDevice(secretKey: secretKey)
+                        let _ = await OpeniceManager.shared.resetDevice(secretKey: secretKey)
                     }
                 }
                 .buttonStyle(.bordered)
@@ -62,14 +62,14 @@ struct DeviceInfoView: View {
                             second: 0,
                             of: Date()
                         )!
-                        let _ =  await OpeniceSDK.shared.syncTime(date: dateAt11)
+                        let _ =  await OpeniceManager.shared.syncTime(date: dateAt11)
                     }
                 }
                 .buttonStyle(.bordered)
     
                 Button("获取世界时钟") {
                     Task{
-                        let result = await OpeniceSDK.shared.getWorldTimes()
+                        let result = await OpeniceManager.shared.getWorldTimes()
                         print("获取世界时钟 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
@@ -80,7 +80,7 @@ struct DeviceInfoView: View {
                             WorldTimeItem(id: 2, zone: 86, cityName: "上海"),
                             WorldTimeItem(id: 3, zone: 86, cityName: "广州")
                         ]
-                        let result = await OpeniceSDK.shared.setWorldTimes(cities)
+                        let result = await OpeniceManager.shared.setWorldTimes(cities)
                         print("设置世界时钟 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)

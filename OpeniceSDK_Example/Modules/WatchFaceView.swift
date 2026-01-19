@@ -59,7 +59,7 @@ struct WatchFaceView: View {
                             function: .distance,
                             backgroundPath: localImagePath
                         )
-                        let state = await OpeniceSDK.shared.installCustomDial(config) { prog in
+                        let state = await OpeniceManager.shared.installCustomDial(config) { prog in
                             print("进度：\(Int(prog * 100))%")
                         }
                         print("最终状态：\(state)")
@@ -102,7 +102,7 @@ struct WatchFaceView: View {
                 }
                 Button("安装表盘文件") {
                     Task {
-                        let state = await OpeniceSDK.shared.installOnlineDial(id: 1, name: "666", filePath: localPath) { prog in
+                        let state = await OpeniceManager.shared.installOnlineDial(id: 1, name: "666", filePath: localPath) { prog in
                             print("进度：\(Int(prog * 100))%")
                         }
                         print("最终状态：\(state)")
