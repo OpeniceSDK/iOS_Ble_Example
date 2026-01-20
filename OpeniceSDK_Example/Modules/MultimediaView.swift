@@ -50,46 +50,6 @@ struct MultimediaView: View {
                     }
                 }
                 .buttonStyle(.bordered)
-
-                Button("下发音乐信息") {
-                    Task {
-                        let success = await OpeniceManager.shared.pushMusicInfo(
-                            title: "Song Title",
-                            artist: "Artist Name"
-                        )
-                        print("下发音乐信息 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-
-                Button("下发音乐状态") {
-                    Task {
-                        let config = MusicStateConfig(state: .playing, curTime: 12000, duration: 240000)
-                        let success = await OpeniceManager.shared.pushMusicState(config)
-                        print("下发音乐状态 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-
-                Button("下发音乐音量") {
-                    Task {
-                        let success = await OpeniceManager.shared.pushMusicVolume(
-                            current: 8,
-                            max: 15
-                        )
-                        print("下发音乐音量 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-
-                Button("进入音乐界面") {
-                    Task {
-                        let success = await OpeniceManager.shared.notifyPlayState()
-                        print("进入音乐界面 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-                
                 Button("同步短信回复") {
                     Task {
                         // 模拟数据：5条常用快捷回复

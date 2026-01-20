@@ -82,4 +82,18 @@ class DeviceLogViewModel: NSObject, ObservableObject, OpeniceManagerDelegate {
     func onDeviceAGPS(data: [String: Any]) {
         appendLog("获取AGPS", data: data)
     }
+    
+    func onDeviceOTAState() {
+        Task {
+            await OpeniceManager.shared.sendOTAState(0, version: "0.0.33",tip: "1236645345353")
+        }
+        appendLog("设备请求OTA升级状态")
+    }
+    
+    func onDeviceOTARequest() {
+        Task {
+            await OpeniceManager.shared.sendOTARequest(confirm: true)
+        }
+        appendLog("设备发起OTA升级")
+    }
 }

@@ -102,10 +102,23 @@ struct WatchFaceView: View {
                 }
                 Button("安装表盘文件") {
                     Task {
-                        let state = await OpeniceManager.shared.installOnlineDial(id: 1, name: "666", filePath: localPath) { prog in
+                        let state = await OpeniceManager.shared.installOnlineDial(id: 2, name: "666", filePath: localPath) { prog in
                             print("进度：\(Int(prog * 100))%")
                         }
                         print("最终状态：\(state)")
+                    }
+                }.buttonStyle(.bordered)
+                Button("获取表盘列表") {
+                    Task {
+                        let result = await OpeniceManager.shared.getDialList()
+                        print("最终状态：\(result as Any)")
+                    }
+                }.buttonStyle(.bordered)
+                
+                Button("设置/删除表盘") {
+                    Task {
+                        let result = await OpeniceManager.shared.operateDial(.set, dialId: 2)
+                        print("最终状态：\(result as Any)")
                     }
                 }.buttonStyle(.bordered)
             }
