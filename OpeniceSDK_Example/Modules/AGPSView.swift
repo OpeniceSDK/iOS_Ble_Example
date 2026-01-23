@@ -61,28 +61,7 @@ struct AGPSView: View {
                         let config = AgpsConfig(
                             longitude: 112.9483,
                             latitude: 28.2278,
-                            timestamp: nowTimestamp,
-                            
-                            // 卫星状态数据
-                            gpsGlonassState: 0,
-                            gpsGlonassUpdateDate: nowTimestamp,
-                            gpsGlonassExpiryDate: 7,
-                            
-                            gpsState: 1,
-                            gpsUpdateDate: nowTimestamp+1,
-                            gpsExpiryDate: 7,
-                            
-                            galileoState: 1,
-                            galileoUpdateDate: nowTimestamp+1,
-                            galileoExpiryDate: 7,
-                            
-                            glonassState: 1,
-                            glonassUpdateDate: nowTimestamp+1,
-                            glonassExpiryDate: 7,
-                            
-                            beidouState: 1,
-                            beidouUpdateDate: nowTimestamp+1,
-                            beidouExpiryDate: 7
+                            timestamp: nowTimestamp
                         )
                         
                         let state = await OpeniceManager.shared.installAgps(config, filePath: localPath){ prog in
