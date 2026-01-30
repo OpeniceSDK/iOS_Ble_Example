@@ -34,7 +34,7 @@ struct DeviceInfoView: View {
                 Button("获取设备信息") {
                     Task {
                         let secretKey = String(currentDevice?.secretKey ?? "")
-                        let result = await OpeniceManager.shared.getDeviceInfo(secretKey: secretKey,fields: [.battery])
+                        let result = await OpeniceManager.shared.getDeviceInfo(secretKey: secretKey)
                         print("设备信息:", result)
                     }
                 }

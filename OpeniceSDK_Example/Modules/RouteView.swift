@@ -6,12 +6,9 @@
 //
 import OpeniceSDK
 import SwiftUI
-import UniformTypeIdentifiers
+import CoreLocation
 
 struct RouteView: View {
-    @State private var localRoutePath: String = ""
-    @State private var isImporting: Bool = false
-    
     let columns = [
         GridItem(.adaptive(minimum: 120), spacing: 6)
     ]
@@ -21,45 +18,15 @@ struct RouteView: View {
                 .font(.title2)
                 .foregroundColor(.red)
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
-                Button("选择路线文件") {
-                    isImporting = true
-                }
-                .buttonStyle(.bordered)
-                .fileImporter(
-                    isPresented: $isImporting,
-                    allowedContentTypes: [UTType.item],
-                    allowsMultipleSelection: false
-                ) { result in
-                    switch result {
-                    case .success(let urls):
-                        guard let url = urls.first else { return }
-                        if url.startAccessingSecurityScopedResource() {
-                            defer { url.stopAccessingSecurityScopedResource() }
-                            do {
-                                // 拷贝到本地可访问目录
-                                let data = try Data(contentsOf: url)
-                                let destURL = FileManager.default
-                                    .urls(for: .documentDirectory, in: .userDomainMask)[0]
-                                    .appendingPathComponent(url.lastPathComponent)
-                                try data.write(to: destURL, options: .atomic)
-                                localRoutePath = destURL.path
-                                print("已选择并复制文件: \(localRoutePath)")
-                            } catch {
-                                print("读取/复制文件失败: \(error)")
-                            }
-                        } else {
-                            print("无法访问安全作用域资源")
-                        }
-                    case .failure(let error):
-                        print("选择文件失败: \(error)")
-                    }
-                }
                 
                 Button("新增路线") {
                     Task {
-                        let state = await OpeniceManager.shared.addRouteList(routeId: 102226, routeName:"111www",
-                                                                       routeDistance: 1400,
-                                                                       filePath: localRoutePath
+                        
+                        let points = generateSimulatedTrack(center: CLLocationCoordinate2D(latitude: 39.9042, longitude: 116.4074), count: 50)
+                        
+                        let state = await OpeniceManager.shared.addRouteList(routeId: 102259, routeName:"yes1",
+                                                                             routeDistance: 199,
+                                                                             coordinates: points,
                         ) { prog in
                             print("上传进度: \(Int(prog * 100))%")
                         }
@@ -75,12 +42,26 @@ struct RouteView: View {
                 
                 Button("删除路线") {
                     Task {
-                        let success = await OpeniceManager.shared.deleteRouteList(routeIds: [102226])
+                        let success = await OpeniceManager.shared.deleteRouteList(routeIds: [102259])
                         print("删除路线 success:", success)
                     }
                 }.buttonStyle(.bordered)
                 
             }
         }
+    }
+    
+    // Generate a circle of points around a center
+    public func generateSimulatedTrack(center: CLLocationCoordinate2D, count: Int) -> [CLLocationCoordinate2D] {
+        var list: [CLLocationCoordinate2D] = []
+        let radius = 0.01 // rough degrees
+        
+        for i in 0..<count {
+            let angle = Double(i) * (2.0 * .pi / Double(count))
+            let lat = center.latitude + radius * cos(angle)
+            let lng = center.longitude + radius * sin(angle)
+            list.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
+        }
+        return list
     }
 }

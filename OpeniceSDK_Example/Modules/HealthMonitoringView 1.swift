@@ -54,33 +54,6 @@ struct HealthMonitoringView1: View {
                     }
                 }
                 .buttonStyle(.bordered)
-                
-                Button("设置压力检测") {
-                    Task {
-                        // 模拟数据：每天 8:00 - 22:00，每60分钟检测一次
-                        let config = BloodPressureDetectionConfig(
-                            autoDetection: true,
-                            maxBloodPressureAlarm: true,
-                            maxBloodPressure: 140, // 模拟压力阈值
-                            startHour: 8, startMin: 0,
-                            endHour: 22, endMin: 0,
-                            interval: 60,
-                            repeatWeek: .everyday
-                        )
-                        let success = await OpeniceManager.shared.setBloodPressureDetection(config)
-                        print("设置压力检测 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-                
-                Button("开启呼吸频率") {
-                    Task {
-                        let success = await OpeniceManager.shared.setRespiratoryRate(autoDetection: true)
-                        print("设置呼吸频率 success:", success)
-                    }
-                }
-                .buttonStyle(.bordered)
-                
                 Button("设置喝水提醒") {
                     Task {
                         // 模拟数据：早9晚6，每60分钟提醒，周一到周五(31 -> 00011111)

@@ -117,17 +117,18 @@ struct HomePageView: View {
     private func autoConnect() async {
         guard let savedDevice = currentDevice else { return }
 
-        let success: Bool = await OpeniceManager.shared.reconnect(savedDevice.deviceId)
-        await MainActor.run {
-            if success {
-                print("✅ 连接成功，切换界面")
-            } else {
-                print("❌ 连接失败 (可能是蓝牙断开或超时)")
-                withAnimation {
-                    isBound = false
-                }
-            }
-        }
+        let isSuccess = await OpeniceManager.shared.reconnect(savedDevice.deviceId)
+        print("isSuccess:\(isSuccess)")
+//        await MainActor.run {
+//            if success {
+//                print("✅ 连接成功，切换界面")
+//            } else {
+//                print("❌ 连接失败 (可能是蓝牙断开或超时)")
+//                withAnimation {
+//                    isBound = false
+//                }
+//            }
+//        }
         
     }
     
@@ -135,17 +136,12 @@ struct HomePageView: View {
         Task {
             guard let savedDevice = currentDevice else { return }
             // 2. 执行异步解绑 (此时会等待 SDK 的 return)
-            let isSuccess = await OpeniceManager.shared.unBind(secretKey: savedDevice.secretKey)
-            
+            let _ = await OpeniceManager.shared.unBind(secretKey: savedDevice.secretKey)
+            DeviceStorage.shared.clear()
             // 3. 回到主线程更新 UI
             await MainActor.run {
-                if isSuccess {
-                    print("✅ 解绑成功，切换界面")
-                    withAnimation {
-                        isBound = false
-                    }
-                } else {
-                    print("❌ 解绑失败 (可能是蓝牙断开或超时)")
+                withAnimation {
+                    isBound = false
                 }
             }
         }

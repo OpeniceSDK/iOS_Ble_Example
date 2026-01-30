@@ -40,10 +40,10 @@ struct SportsView: View {
                 
                 Button("同步运动记录") {
                     Task{
-                        let result = await OpeniceManager.shared.getSportsRecordHeader()
-                        print("运动记录获取完毕，总数: \(result.count)")
+                        let result = await OpeniceManager.shared.getSportsRecord()
+                        print("运动记录获取完毕，总数: \(result.list.count), code:\(result.code)")
                         
-                        for item in result {
+                        for item in result.list {
                             print("准备获取详情, ID: \(item.toDict())")
                         }
                     }

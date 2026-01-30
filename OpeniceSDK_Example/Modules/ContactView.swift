@@ -17,12 +17,6 @@ struct ContactView: View {
                 .font(.title2)
                 .foregroundColor(.red)
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
-                Button("推送来电名称") {
-                    Task{
-                        let result = await OpeniceManager.shared.syncCallName("吴八")
-                        print("推送来电名称 result:", result as Any)
-                    }
-                }.buttonStyle(.bordered)
                 Button("同步联系人") {
                     Task{
                         let contacts: [ContactItem] = [

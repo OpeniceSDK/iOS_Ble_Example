@@ -20,6 +20,8 @@ struct ContentView: View {
                     .buttonStyle(.bordered)
                 Button("停止扫描") { OpeniceManager.shared.stopScan()  }
                     .buttonStyle(.bordered)
+                Button("清除本地信息") { DeviceStorage.shared.clear()  }
+                    .buttonStyle(.bordered)
             }
         
             List(devices) { device in
@@ -34,7 +36,9 @@ struct ContentView: View {
                     Spacer()
                     Text("\(device.rssi)")
                         .foregroundColor(device.rssi > -60 ? .green : .orange)
-                }.onTapGesture {
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
                     handleDeviceTap(device: device)
                 }
             }.listStyle(.plain).frame(minHeight: 0, maxHeight: 500).task {
@@ -55,17 +59,20 @@ struct ContentView: View {
                     device: device,
                     secretKey: "101157",
                     randomNumber: "123456"
-                )
-                let dict: [String : Any] = [
-                    "name": device.name,
-                    "mac": device.mac,
-                    "deviceId": device.deviceId,
-                    "secretKey": "101157",
-                ]
-                let myDevice = DeviceInfo(from: dict)
-                DeviceStorage.shared.save(myDevice)
-                
+                ){
+                    return 0
+                }
+                print("isSuccess:\(isSuccess)")
                 if isSuccess {
+                    let dict: [String : Any] = [
+                        "name": device.name,
+                        "mac": device.mac,
+                        "deviceId": device.deviceId,
+                        "secretKey": "101157",
+                    ]
+                    let myDevice = DeviceInfo(from: dict)
+                    DeviceStorage.shared.save(myDevice)
+                    
                     await MainActor.run {
                         withAnimation {
                             self.isBound = true
