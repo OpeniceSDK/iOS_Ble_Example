@@ -40,12 +40,23 @@ struct SportsView: View {
                 
                 Button("同步运动记录") {
                     Task{
-                        let result = await OpeniceManager.shared.getSportsRecord()
-                        print("运动记录获取完毕，总数: \(result.list.count), code:\(result.code)")
-                        
-                        for item in result.list {
-                            print("准备获取详情, ID: \(item.toDict())")
+                        var allRecords: [BleSportsHeaderConfig] = []
+                        while true {
+                            let (code, record) = await OpeniceManager.shared.getSportsRecord()
+                
+                            if let item = record {
+                                print("📦 收到记录: \(item.recordId)")
+                                allRecords.append(item)
+                            } else {
+                                if code == 0 {
+                                    print("✅ 同步正常完成 (共 \(allRecords.count) 条)")
+                                } else {
+                                    print("❌ 同步异常中断 (错误码: \(code))")
+                                }
+                                break
+                            }
                         }
+                        print("🎉 最终获取到 \(allRecords.count) 条记录")
                     }
                 }.buttonStyle(.bordered)
                 Button("设置运动推送") {
