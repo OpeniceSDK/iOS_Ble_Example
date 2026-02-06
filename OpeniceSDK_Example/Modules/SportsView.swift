@@ -61,7 +61,7 @@ struct SportsView: View {
                 }.buttonStyle(.bordered)
                 Button("设置运动推送") {
                     Task{
-                        let result = await OpeniceManager.shared.sportsPushSet(.baseball)
+                        let result = await OpeniceManager.shared.sportsPushSet(.indoorWalk)
                         print("设置运动推送 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)

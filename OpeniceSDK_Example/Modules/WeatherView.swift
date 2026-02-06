@@ -57,7 +57,7 @@ struct WeatherView: View {
                         let config = WeatherInfo(
                             city: "深圳市",
                             currentTemp: 28,
-                            weatherState: .cloudy,      // 今天多云
+                            weatherState: .shower,      // 今天多云
                             windDirection: .southEast,  // 东南风
                             windLevel: 3,               // 3级
                             uvRays: .moderate,          // 紫外线中等

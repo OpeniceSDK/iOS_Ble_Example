@@ -76,7 +76,7 @@ struct DeviceInfoView: View {
                 Button("设置世界时钟") {
                     Task{
                         let cities: [WorldTimeItem] = [
-                            WorldTimeItem(id: 1, zone: 86, cityName: "北京"),
+                            WorldTimeItem(id: 1, zone: -86, cityName: "北京"),
                             WorldTimeItem(id: 2, zone: 86, cityName: "上海"),
                             WorldTimeItem(id: 3, zone: 86, cityName: "广州")
                         ]

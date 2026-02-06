@@ -37,7 +37,7 @@ struct FemaleHealthView: View {
            
                 Button("女性健康开关") {
                     Task{
-                        let result = await OpeniceManager.shared.syncWomanHealthyState(isShow: true)
+                        let result = await OpeniceManager.shared.syncWomanHealthyState(isShow: false)
                         print("女性健康功能 result:", result as Any)
                     }
                 }.buttonStyle(.bordered)
